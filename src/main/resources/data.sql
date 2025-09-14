@@ -1,5 +1,5 @@
 insert into "user" (name)
 values
-  ('mikoto2000'),
-  ('mikoto2001'),
-  ('mikoto2002');
+  ('mikoto3000'),
+  ('mikoto3001'),
+  ('mikoto3002');

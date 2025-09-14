@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import dev.mikoto2000.springboot.workshop.bean.User;
 
@@ -22,6 +23,7 @@ public class UserMapperTest {
   private UserMapper mapper;
 
   @Test
+  @Sql("/sql/UserMapperTest-findAll.sql")
   public void testFindAll() {
     List<User> users = mapper.findAll();
     assertEquals(3, users.size());
