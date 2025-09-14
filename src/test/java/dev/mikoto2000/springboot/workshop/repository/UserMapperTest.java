@@ -7,8 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import dev.mikoto2000.springboot.workshop.bean.User;
@@ -16,7 +16,7 @@ import dev.mikoto2000.springboot.workshop.bean.User;
 /**
  * UserMapperTest
  */
-@SpringBootTest
+@MybatisTest
 public class UserMapperTest {
 
   @Autowired
