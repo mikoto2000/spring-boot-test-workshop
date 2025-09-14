@@ -48,11 +48,23 @@ public class UserServiceTest {
     assertEquals(expect, actual);
   }
 
+  @Test
+  // 意味ないテストになっているが、例外創出系テストの練習として実装
+  public void testFindWIthException() {
+    // モックの `findAll` が呼ばれた際の戻り値を指定
+    when(mapper.findAll()).thenThrow(new RuntimeException());
+
+    // findAll 呼び出し時に RuntimeException が発生することを確認
+    assertThrows(RuntimeException.class, () -> service.findAll());
+
+  }
+
   @BeforeEach
   public void setup() {
   }
 
   @AfterEach
   public void tearDown() {
+    reset(mapper);
   }
 }
