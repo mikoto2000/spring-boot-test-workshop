@@ -39,6 +39,15 @@ public class CalcControllerTest {
       .andExpect(status().isOk())
       .andExpect(content().string("3"));
 
+    //// service の add メソッドに、想定通りの引数が渡されているかを確認
+
+    // 引数確認用 Captor
+    ArgumentCaptor<Integer> aCaptor = ArgumentCaptor.forClass(Integer.class);
+    ArgumentCaptor<Integer> bCaptor = ArgumentCaptor.forClass(Integer.class);
+    verify(service, times(1)).add(aCaptor.capture(), bCaptor.capture());
+    assertEquals(1, aCaptor.getValue());
+    assertEquals(2, bCaptor.getValue());
+
   }
 
   @BeforeEach
