@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import dev.mikoto2000.springboot.workshop.bean.User;
 import dev.mikoto2000.springboot.workshop.repository.UserMapper;
@@ -18,7 +18,7 @@ import dev.mikoto2000.springboot.workshop.repository.UserMapper;
 /**
  * UserServiceTest
  */
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
   @Mock
@@ -26,7 +26,6 @@ public class UserServiceTest {
   private UserMapper mapper;
 
   // テスト対象
-  @InjectMocks
   private UserService service;
 
   @Test
@@ -61,6 +60,7 @@ public class UserServiceTest {
 
   @BeforeEach
   public void setup() {
+    service = new UserService(mapper);
   }
 
   @AfterEach
