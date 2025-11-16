@@ -1,11 +1,9 @@
 package dev.mikoto2000.springboot.workshop.controller;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.mikoto2000.springboot.workshop.bean.User;
 import dev.mikoto2000.springboot.workshop.service.UserService;
 import lombok.RequiredArgsConstructor;
 
@@ -18,8 +16,17 @@ public class UserController {
 
   private final UserService service;
 
-  @GetMapping("/users")
-  public List<User> users() {
-    return service.findAll();
+  /**
+   * 指定した usreId のユーザーの年齢を返却する。
+   *
+   * @param userId ユーザー ID
+   * @return ユーザーの年齢
+   */
+  @GetMapping("/users/{userId}/age")
+  public Integer getAge(
+      @PathVariable Long userId
+      ) {
+    return service.getAge(userId);
   }
 }
+
