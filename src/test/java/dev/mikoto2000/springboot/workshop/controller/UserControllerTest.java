@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -32,12 +33,14 @@ public class UserControllerTest {
   private UserService service;
 
   @Test
-  public void testUsers() throws Exception {
-    when(service.findAll()).thenReturn(List.of(new User("mikoto2000")));
+  public void ユーザーの年齢を取得する() throws Exception {
+    // ユーザー ID 1 のユーザーが 25 歳だったとする
+    when(service.getAge(1L)).thenReturn(25);
 
-    mockMvc.perform(get("/users"))
+    // controller 呼び出しと値の確認
+    mockMvc.perform(get("/users/1/age"))
       .andExpect(status().isOk())
-      .andExpect(content().string("[{\"name\":\"mikoto2000\"}]"));
+      .andExpect(content().string("25"));
   }
 
   @BeforeEach

@@ -1,10 +1,9 @@
 package dev.mikoto2000.springboot.workshop.service;
 
-import java.time.LocalDate;
-
 import org.springframework.stereotype.Service;
 
 import dev.mikoto2000.springboot.workshop.repository.UserMapper;
+import dev.mikoto2000.springboot.workshop.util.DateTimeUtil;
 import dev.mikoto2000.springboot.workshop.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class UserService {
+
+  private final DateTimeUtil dateTimeUtil;
 
   private final UserMapper userMapper;
 
@@ -32,10 +33,14 @@ public class UserService {
     }
     var user = userOpt.get();
 
+    // 本日の日付の取得
+    // 単体テスト時に楽に DI できるように
+    // 直接 LocalDate.now() を使わないようにする
+    var today = dateTimeUtil.now();
+
     // 誕生日の取得
     // 本当は User クラスにあるべきだけど
     // 説明の簡単化のため UserUtil クラスに実装している
-    var today = LocalDate.now();
     var birthday = UserUtil.getAge(user.getBirthday(), today);
 
     return birthday;

@@ -2,7 +2,8 @@ package dev.mikoto2000.springboot.workshop.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.transaction.annotation.Transactional;
 
 import dev.mikoto2000.springboot.workshop.bean.User;
 
@@ -23,13 +25,18 @@ public class UserMapperTest {
   private UserMapper mapper;
 
   @Test
-  @Sql("/sql/UserMapperTest-findAll.sql")
-  public void testFindAll() {
-    List<User> users = mapper.findAll();
-    assertEquals(3, users.size());
-    assertEquals("mikoto2000", users.get(0).getName());
-    assertEquals("mikoto2001", users.get(1).getName());
-    assertEquals("mikoto2002", users.get(2).getName());
+  @Sql("/sql/UserMapperTest-findById.sql")
+  @Transactional
+  public void testFindById() {
+    Optional<User> userOpt = mapper.findById(1L);
+
+    assertTrue(userOpt.isPresent());
+
+    User user = userOpt.get();
+
+    assertEquals(user.getId(), 1L);
+    assertEquals(user.getName(), "mikoto2000");
+    assertEquals(user.getBirthday(), LocalDate.of(2000, 1, 1));
   }
 
   @BeforeEach
