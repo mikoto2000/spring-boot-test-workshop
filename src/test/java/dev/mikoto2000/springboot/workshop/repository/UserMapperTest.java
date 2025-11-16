@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +36,5 @@ public class UserMapperTest {
     assertEquals(user.getName(), "mikoto2000");
     assertEquals(user.getBirthday(), LocalDate.of(2000, 1, 1));
   }
-
-  @BeforeEach
-  public void setup() {
-  }
-
-  @AfterEach
-  public void tearDown() {
-  }
 }
+

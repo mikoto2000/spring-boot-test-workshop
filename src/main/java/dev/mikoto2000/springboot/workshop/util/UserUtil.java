@@ -19,6 +19,14 @@ public class UserUtil {
    * @param targetDate 計算の基準日
    */
   public static Integer getAge(LocalDate birthday, LocalDate targetDate) {
+    if (birthday == null) {
+      throw new IllegalArgumentException("birthday に値を設定してください");
+    }
+
+    if (targetDate == null) {
+      throw new IllegalArgumentException("targetDate に値を設定してください");
+    }
+
     return Period.between(birthday, targetDate).getYears();
   }
 }
